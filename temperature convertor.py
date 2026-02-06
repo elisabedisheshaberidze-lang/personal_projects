@@ -17,18 +17,28 @@ def convert_temperature(temp):
         # convertion
         c_to_f = (number * 9/5) + 32
         f_to_c = (number - 32) * 5/9
-        
+        c_to_k = number + 273.15
+        k_to_c = number - 273.15
+        f_to_k = (number - 32) * 5/9 + 273.15
+        k_to_f = (9/5) * (number - 273.15) + 32
         if char == 'C':
-             result = c_to_f
+            result1 = f'{c_to_f:.2f} fahrenheit'
+            result2 = f'{c_to_k:.2f} kelvin'
         elif char == 'F':
-             result = f_to_c
+            result1 = f'{f_to_c:.2f} celsius'
+            result2 = f'{f_to_k:.2f} kelvin'
+        elif char == 'K':
+            result1 = f'{k_to_c:.2f} celsius'
+            result2 = f'{k_to_f:.2f} fahrenheit'
         else:
-                raise ValueError(
-                    'Wrong input. It must contain only one unit of temperature (C or F)')
+            raise ValueError(
+                'Wrong input. It must contain only one unit of temperature (C or F)')
     except ValueError as e:
-            print(e)
+        print(e)
+    except TypeError:
+        print('Please enter valid input')
     else:
-         return result
+        return f'{number} {char} is equal to {result1} and {result2}.'
 
 
-print(convert_temperature('89 b'))
+print(convert_temperature('89K'))
