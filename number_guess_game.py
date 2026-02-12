@@ -36,38 +36,77 @@ def get_username():
 # game dificulty
 
 
-def game_difficulty(limit):
+def game_difficulty():
     print('Please choose the difficulty level of the game ')
     while True:
         try:
-            limit = int(input('easy: 10, medium: 30 or hard: 50:'))
+            limit = int(input('easy: 10, medium: 30 or hard: 50. '))
             if limit in [10, 30, 50]:
                 return limit
             else:
-                print('Reminder: limit must be either 10, 30, or 50.')
+                print('Reminder: limit must be either 10, 30, or 50: ')
         except ValueError:
             print('Please enter the number!')
-
-
 player_name = get_username()
-rules()
+
 # generate random intts based on the chosen dificulty level
-# give player 5 tries and hints odd/even
+# give player 5 tries and hiants odd/even
 # create function for medium hard level and if player need thhey willcall it
 
-
-def play_game():
-    generated_number = random.randint(1, game_difficulty())
-    if generated_number % 2 == 0:
-        print('The number is even')
+# def generate_number():
+#     generated_number = random.randint(1, game_difficulty())
+#     if generated_number % 2 == 0:
+#         print('The number is even')
+#     else:
+#         print('The number is odd')
+#     return generated_number
+# functions so far
+# rules() - introduction
+# get_username() - defines user
+# game_difficulty() - dificulty (This will determine some of the game rules)
+# generate_number() - generates number based on the  dificulty
+# number_to_guess = generate_number()
+difficulty = game_difficulty()
+def score_systemm():
+    if game_difficulty() == 10:
+        score = 5
+    elif game_difficulty() == 30:
+        score = 10
     else:
-        print('The number is odd')
-    return generated_number
+        score = 20
+    return score
+def play_game():
+    total_score = 0
+    while total_score < 100:
+        # number generation
+        generated_number = random.randint(1, difficulty)
+        if generated_number % 2 == 0:
+            print('The number is even')
+        else:
+            print('The number is odd')
+        number_to_guess = generated_number
+        tries = 5
+        while tries > 0:
+            number = int(input('Take a guess! '))
+            if number == number_to_guess:
+                print('Congratulation! you guessed the number')
+                if difficulty == 10:
+                    total_score += 5
+                elif difficulty == 30:
+                    total_score += 10
+                else:
+                    total_score += 20
+                break
+            else:
+                tries -= 1
+                if tries == 0 and total_score > 0:
+                    total_score -= score_systemm()
+                elif tries ==0 and total_score ==0:
+                    total_score == 0
+            print(f'Your total score is {total_score}')
+    
 
 
-def guess_the_number():
-    tries = 5
-    number = int(input('Take a guess'))
-    while tries > 0:
-        print(number)
-        tries -= 1
+
+        
+
