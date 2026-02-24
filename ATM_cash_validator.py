@@ -13,13 +13,13 @@ def cash_validator():
         while True:
             try:
                 current_balance = float(input("Enter your account balance: "))
-                if current_balance < 0:
+                if current_balance <= 0:
                     print('Your balance must be greater than 0!')
                     continue
                 while True:
                     amount_to_withdraw = float(input("Enter amount to withdraw. "
                                                      "(multiples of 20 e.g 20, 40, 60... " ))
-                    if amount_to_withdraw < 0:
+                    if amount_to_withdraw <= 0:
                         print('Please enter correct number!')
                         continue
                     elif amount_to_withdraw > current_balance:
@@ -31,8 +31,8 @@ def cash_validator():
                     else:
                         break
                 remaining_balance = current_balance - amount_to_withdraw
-                return print(f'Dispensing {amount_to_withdraw}. New balance: {remaining_balance}')
-
+                print(f'Dispensing {amount_to_withdraw}. New balance: {remaining_balance}')
+                return
             except ValueError:
                 print("Please enter a numeric value")
 cash_validator()
